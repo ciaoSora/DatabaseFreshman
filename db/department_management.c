@@ -1,0 +1,75 @@
+/*
+Database "department_management" contains tables:
+	department
+	head
+	management
+*/
+
+#ifndef DEPARTMENT_MANAGEMENT
+#define DEPARTMENT_MANAGEMENT
+
+struct T_department {
+	double department_id;
+	char name[30];
+	char creation[5];
+	double ranking;
+	double budget_in_billions;
+	double num_employees;
+};
+
+struct T_head {
+	double head_id;
+	char name[19];
+	char born_state[12];
+	double age;
+};
+
+struct T_management {
+	double department_id;	// --> department.department_id
+	double head_id;	// --> head.head_id
+	char temporary_acting[4];
+};
+
+struct T_department
+department[] = {
+	{  1,                         "State", "1789",  1,  9.96,   30266.0 },
+	{  2,                      "Treasury", "1789",  2,  11.1,  115897.0 },
+	{  3,                       "Defense", "1947",  3, 439.3, 3000000.0 },
+	{  4,                       "Justice", "1870",  4,  23.4,  112557.0 },
+	{  5,                      "Interior", "1849",  5,  10.7,   71436.0 },
+	{  6,                   "Agriculture", "1889",  6,  77.6,  109832.0 },
+	{  7,                      "Commerce", "1903",  7,   6.2,   36000.0 },
+	{  8,                         "Labor", "1913",  8,  59.7,   17347.0 },
+	{  9,     "Health and Human Services", "1953",  9, 543.2,   67000.0 },
+	{ 10, "Housing and Urban Development", "1965", 10,  46.2,   10600.0 },
+	{ 11,                "Transportation", "1966", 11,  58.0,   58622.0 },
+	{ 12,                        "Energy", "1977", 12,  21.5,  116100.0 },
+	{ 13,                     "Education", "1979", 13,  62.8,    4487.0 },
+	{ 14,              "Veterans Affairs", "1989", 14,  73.2,  235000.0 },
+	{ 15,             "Homeland Security", "2002", 15,  44.6,  208000.0 }
+};
+
+struct T_head
+head[] = {
+	{  1,        "Tiger Woods",     "Alabama", 67.0 },
+	{  2,      "Sergio García",  "California", 68.0 },
+	{  3,         "K. J. Choi",     "Alabama", 69.0 },
+	{  4,        "Dudley Hart",  "California", 52.0 },
+	{  5,       "Jeff Maggert",    "Delaware", 53.0 },
+	{  6,      "Billy Mayfair",  "California", 69.0 },
+	{  7,       "Stewart Cink",     "Florida", 50.0 },
+	{  8,         "Nick Faldo",  "California", 56.0 },
+	{  9, "Pádraig Harrington", "Connecticut", 43.0 },
+	{ 10,   "Franklin Langham", "Connecticut", 67.0 }
+};
+
+struct T_management
+management[] = {
+	{  2,  5, "Yes" },
+	{ 15,  4, "Yes" },
+	{  2,  6, "Yes" },
+	{  7,  3,  "No" },
+	{ 11, 10,  "No" }
+};
+
+#endif
