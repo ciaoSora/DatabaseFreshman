@@ -33,6 +33,7 @@ int main() {
 	std::ifstream ans_in("ans.txt");
 	std::ifstream fin("../problems.json");
 	std::ofstream fout;
+	utility_init();
 	
 	/* STEP 0: Get current problem ID */
 	fout.open("ans.txt", std::ios::app);
