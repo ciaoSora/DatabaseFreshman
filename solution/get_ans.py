@@ -1,3 +1,4 @@
+from utility import *
 
 # STEP 0: Get current problem ID
 ans_in = open("ans.txt", "r")
