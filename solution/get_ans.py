@@ -1,4 +1,5 @@
 from utility import *
+import code
 
 # STEP 0: Get current problem ID
 ans_in = open("ans.txt", "r")
@@ -77,7 +78,8 @@ def nx():
     print(db_id)
     print(question)
 
-
+interp = code.InteractiveConsole(globals())
+interp.interact("Enter interactive mode.")
 
 
 
