@@ -2,7 +2,7 @@ from utility import *
 import code
 
 # STEP 0: Get current problem ID
-ans_in = open("ans.txt", "r")
+ans_in = open("ans.txt", "r", encoding = "UTF-8")
 cur_pid = -1
 ch = ans_in.read(1)
 while ch != '':
@@ -12,7 +12,7 @@ while ch != '':
 
 # STEP 1: Locate problem in problem.json
 tem = -1
-fin = open("../problems.json", "r")
+fin = open("../problems.json", "r", encoding = "UTF-8")
 ch = fin.read(1)
 while ch != '':
     if ch == '}':
@@ -22,15 +22,15 @@ while ch != '':
     ch = fin.read(1)
 
 # Functions for interact
-fout = open("ans.txt", "a")
+fout = open("ans.txt", "a", encoding = "UTF-8")
 
 def sav():
     global fout
     fout.close()
-    fout = open("ans.txt", "a")
+    fout = open("ans.txt", "a", encoding = "UTF-8")
 
 def print_id():
-    fout.write("$" + str(cur_pid + 1) + ":")
+    fout.write("$" + str(cur_pid) + ":")
     sav()
 
 def pr(to_write):
@@ -74,22 +74,9 @@ def nx():
         question = question + ch
         ch = fin.read(1);
     
-    print("#" + str(cur_pid))
+    print("#" + str(cur_pid - 1))
     print(db_id)
     print(question)
 
 interp = code.InteractiveConsole(globals())
 interp.interact("Enter interactive mode.")
-
-
-
-
-
-
-
-
-
-
-
-
-

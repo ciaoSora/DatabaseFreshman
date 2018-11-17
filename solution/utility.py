@@ -21,6 +21,9 @@ class Table:
             rt += "\n"
         return rt
 
+    def __len__(self):
+        return len(self.rows)
+
 def cppValidNameChar(ch):
     ch = ord(ch)
     return ch >= ord('a') and ch <= ord('z') or ch >= ord('A') and ch <= ord('Z') or ch == ord('_')
