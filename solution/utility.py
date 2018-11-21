@@ -12,7 +12,7 @@ class Table:
         rt = self.name + "\n"
         for key in self.keys:
             #print(key + " ", end = '')
-            rt += key + "\t"
+            rt += key[0] + "\t"
         rt += "\n"
         for row in self.rows:
             for key in self.keys:
@@ -61,13 +61,17 @@ class DB:
             cnt += 1
             t_keys = []
             while lines[cnt] != "};\n":
+                is_foreign_key = False
                 tem = lines[cnt].split()
+                if len(tem) > 2:
+                    is_foreign_key = True
                 tem = tem[1]
                 t_i = 0
                 while cppValidNameChar(tem[t_i]):
                     t_i += 1
                 tem = tem[:t_i]
-                t_keys.append(tem)
+                t_keys.append((tem, is_foreign_key))
+                
                 cnt += 1
             t_table.keys = tuple(t_keys)
             table_cnt += 1

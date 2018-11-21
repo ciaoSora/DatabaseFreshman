@@ -9,8 +9,8 @@ giveup_url = "http://ecw.sysu.edu.cn:8000/service/table"
 
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
           }
-login_form = {"id": "Your Chinese name",
-              "pwd": "Your password",
+login_form = {"id": "",
+              "pwd": "",
               "app_owner_id": "database",
               }
 
@@ -28,6 +28,11 @@ giveup_form = {"command": '["database/获取下一个题目.script",null,null,"d
 session = requests.session()
 
 def login():
+    global login_form
+    with open("config.json", "r", encoding = "utf-8") as file:
+        jsn = json.load(file)
+        login_form["id"] = jsn["account"]
+        login_form["pwd"] = jsn["password"]
     r = session.post(login_url, data = login_form, headers = headers)
     s = str(r.text)
     if s[2] == 'r':
@@ -43,7 +48,7 @@ def getprob():
 
 def submit(dic, s):
     form = submit_form
-    part0 = '#include \"product_catalog\"\n#include <stdio.h>\n\nint main() {\n\tputs(\"'
+    part0 = '#include \"' + dic["db_id"] + '\"\n#include <stdio.h>\n\nint main() {\n\tputs(\"'
     part1 = '\");\n\treturn 0;\n}'
     dic["script_source"] = part0 + s + part1
     s = str(dic)
@@ -52,7 +57,7 @@ def submit(dic, s):
     form["table_data"] = "[[" + s + "]]"
     r = session.post(submit_url, data = form, headers = headers)
     s = str(r.text)
-    if s[88:94] == "\\u7b54":
+    if s[100:106] == "\\u884c":
         return -1
     if s[-9:-5] == "pass":
         return 1
@@ -74,5 +79,4 @@ def check(dic):
 
 def giveup():
     r = session.post(giveup_url, data = giveup_form, headers = headers)
-    print(r.text)
 
